@@ -175,11 +175,17 @@ def cluster_is_running(threshold_seconds=90):
 MAX_QUEUE = 20
 
 def get_queue_size():
-    from django_q.models import OrmQ, Task
-    pending = OrmQ.objects.count()
-    running = Task.objects.filter(stopped__isnull=True).count()
-    print(pending+running)
-    return pending + running
+    in_queue = OrmQ.objects.count()
+
+    # Ignore tasks running longer than timeout (likely stuck/zombie)
+    stale_threshold = timezone.now() - timedelta(seconds=60)  # match timeout
+    running = Task.objects.filter(
+        started__isnull=False,
+        stopped__isnull=True,
+        started__gte=stale_threshold   # only count recent ones
+    ).count()
+
+    return in_queue + running
 
 def get_code_hash(code):
     return hashlib.sha256(code.encode()).hexdigest()
