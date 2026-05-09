@@ -187,6 +187,19 @@ def get_queue_size():
 
     return in_queue + running
 
+def flush_stale_queue():
+    stale_threshold = timezone.now() - timedelta(seconds=90)
+
+    # Remove OrmQ entries that a worker locked but never finished (zombie locks)
+    OrmQ.objects.filter(lock__lt=stale_threshold).delete()
+
+    # Close out Task records that started but never stopped (zombie tasks)
+    Task.objects.filter(
+        started__isnull=False,
+        stopped__isnull=True,
+        started__lt=stale_threshold
+    ).update(stopped=timezone.now())
+
 def get_code_hash(code):
     return hashlib.sha256(code.encode()).hexdigest()
 
@@ -244,6 +257,9 @@ def execute_code(request):
             return JsonResponse({"job_id": existing, "status": "already_running"})
         # dont enqueue if the same code is already running. This can happen when user clicks the run button multiple times.
         
+        flush_stale_queue()
+        #clear stale queue entries before checking queue size, to get a more accurate count and prevent unnecessary rejections due to stuck tasks.
+
         if get_queue_size() >= MAX_QUEUE:
             print("Queue is full. Cannot process the request at this time.")
             context = {

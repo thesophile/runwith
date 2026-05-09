@@ -4,6 +4,8 @@
 manim/python_code_files/*
 !manim/python_code_files/keep
 
+*.env
+
 myenv/
 runwithenv/
 

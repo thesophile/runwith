@@ -1,22 +1,17 @@
+asgiref==3.11.1
+certifi==2026.4.22
+charset-normalizer==3.4.7
 Django==5.1
-docker==7.1.0
-requests==2.32.3
-gunicorn
-whitenoise
-django-q2==1.8.0 ## see below
 django-hosts==7.0.0
+django-picklefield==3.4.0
+django-q2==1.8.0
+docker==7.1.0
+gunicorn==26.0.0
+idna==3.13
+packaging==26.2
 psycopg2-binary==2.9.11
-
-"""
-Couldnt use qmonitor because this version has a bug which can be solved by going to
-/home/sophile/dev/public/venv/runwithenv/lib/python3.13/site-packages/django_q/monitor_terminal.py
-and replacing line 185 term.center(models.Success.objects.count(), width=col_width)
-with 
-term.center(str(models.Success.objects.count()), width=col_width)
-and line 195 term.center(models.Failure.objects.count(), width=col_width)
-with
-term.center(str(models.Failure.objects.count()), width=col_width)
-if you ever recreate your virtualenv or reinstall django-q, this patch will be wiped and youd need to apply it again.
-
-Never mind, I just Fixed this bug myself. Leaving it there for future reference if anyone else encounters it.
-"""
+python-dotenv==1.2.2
+requests==2.32.3
+sqlparse==0.5.5
+urllib3==2.7.0
+whitenoise==6.12.0
