@@ -17,11 +17,6 @@ import os
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 
-from dotenv import load_dotenv
-import os
-
-load_dotenv()  # looks for .env in project root by default
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 

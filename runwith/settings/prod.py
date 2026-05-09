@@ -19,3 +19,8 @@ SESSION_COOKIE_SECURE = True
     #so that login in any app ensures login in all apps
 SESSION_COOKIE_DOMAIN = ".runwith.cloud"
 CSRF_COOKIE_DOMAIN = ".runwith.cloud"
+
+from dotenv import load_dotenv
+import os
+
+load_dotenv(BASE_DIR / 'runwith_prod.env') 
