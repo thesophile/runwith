@@ -1,0 +1,8 @@
+site_name: Runwith Docs
+
+theme:
+  name: material
+
+nav:
+  - Home: index.md
+  - Manim: manim.md

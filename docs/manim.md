@@ -1,0 +1,19 @@
+## Introduction
+Manim is an open-source Python library used to create mathematical animations, explanatory videos, and visualizations through code. It was originally developed for the animations used by 3Blue1Brown and is now widely used for educational content, simulations, and technical presentations.
+
+This is Not a documentation on manim, but how to use manim in runwith app.
+If you want to learn more about manim, visit [https://docs.manim.community/en/stable/index.html](https://docs.manim.community/en/stable/index.html)
+
+___
+
+## Saving your code
+After logging in, Click on "New" to create a new project and name it.
+Unfortunately, that doesnt automatically open the created project at the present.
+You have to go to "Open" and select the project you have to work on.
+Then you can make any changes and press the "save" button (ctrl+s) to save the changes.
+
+Also, clicking on an example, will import it to your current project and you can work on it like any of your projects.
+
+___
+
+Good luck manimators!
