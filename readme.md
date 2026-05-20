@@ -104,6 +104,11 @@
     Or just set Debug = True, no need for collecstatic
 
 2. **Setup environment**
+
+    - In dev/local environment, Put runwith_dev.env to the root directory (along with manage.py).
+    It is currently placed at docs/runwith_dev.env
+    
+    OR export these directly:
     ```
     export DJANGO_ENV=dev # or prod
     export DJANGO_SECRET_KEY='your_secret_key'
