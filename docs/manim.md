@@ -16,4 +16,7 @@ Also, clicking on an example, will import it to your current project and you can
 
 ___
 
+If you have any doubts, just ask on our [discord server](https://discord.gg/cCJauXrv9Z)
+
+
 Good luck manimators!
