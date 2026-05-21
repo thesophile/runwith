@@ -30,10 +30,12 @@
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
 
+    <!-- local -->
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+
     <!-- For Font Awesome Icon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-    <link rel="stylesheet" href="{% static 'css/base.css' %}">
 
     <!-- Google fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -73,18 +75,32 @@
                 <p>{{ user.username }}</p>
                 {% endif %}
                 <div class="menu">
-                    
-                    <a href="http://docs.runwith.cloud/manim" title="docs"><i class="fa-regular fa-circle-question"></i></a>
+
+                    <a href="http://docs.runwith.cloud/manim" title="docs"><i
+                            class="fa-regular fa-circle-question"></i></a>
                     <a href="https://ko-fi.com/abhinavbabu" title="Sorry, but I am broke.">Donate</a>
                     <a href="{% url 'contact' %}"
                         title="Free free to leave a message (I am not gonna read it)">Contact</a>
                     <div class="dropdown">
                         <a href="#" class="dropbtn">Account &#9662;</a>
                         <div class="dropdown-content">
-                            <a href="{% url 'login' %}">Login</a>
-                            <a href="{% url 'signup' %}"
-                                title="Once you go here, there is no coming back.(at least until I implement a button to delete account)">Signup</a>
+
+                            {% if user.is_authenticated %}
+
                             <a href="{% url 'logout' %}">Logout</a>
+
+                            
+
+                            {% else %}
+
+                            <a href="{% url 'login' %}">Login</a>
+
+                            <a href="{% url 'signup' %}" title="Once you go here, there is no coming back.">
+                                Signup
+                            </a>
+
+                            {% endif %}
+
                         </div>
                     </div>
                 </div>
