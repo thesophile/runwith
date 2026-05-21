@@ -24,7 +24,10 @@
  But, I can't do that alone. I need your help.
  **Please contribute**
  
- 
+!!! info "Open Source"
+
+    Runwith is completely open source.
+    [View source code](https://github.com/thesophile/runwith)
 
 
 ## Local Installation
@@ -146,6 +149,7 @@ GNU Affero General Public License v3.0
 ## Contributing
 
 We still have to
+
 - Fix Save/Open workflow
 - Make Code shareable
 - Make a Library of user generated code.

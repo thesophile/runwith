@@ -517,6 +517,11 @@
   - Other popular libraries. Since we are running from a docker image, any library with an image can be run. Users can select a library and start coding.</p>
 <p>But, I can't do that alone. I need your help.
  <strong>Please contribute</strong></p>
+<div class="admonition info">
+<p class="admonition-title">Open Source</p>
+<p>Runwith is completely open source.
+<a href="https://github.com/thesophile/runwith">View source code</a></p>
+</div>
 <h2 id="local-installation">Local Installation</h2>
 <h3 id="prerequisites">Prerequisites</h3>
 <ul>
@@ -528,17 +533,19 @@
 <h3 id="installation">Installation</h3>
 <ol>
 <li><strong>Clone the Repository:</strong>
-   <code>bash
-   git clone https://github.com/thesophile/runwith.git 
-   cd runwith</code></li>
+   <div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/thesophile/runwith.git<span class="w"> </span>
+<span class="nb">cd</span><span class="w"> </span>runwith
+</code></pre></div></li>
 <li>
 <p><strong>Create a Virtual Environment:</strong></p>
-<p><code>python3 -m venv env
-source env/bin/activate  # On Windows use `env\Scripts\activate`</code></p>
+<div class="highlight"><pre><span></span><code>python3 -m venv env
+source env/bin/activate  # On Windows use `env\Scripts\activate`
+</code></pre></div>
 </li>
 <li>
 <p><strong>Install Dependencies:</strong></p>
-<p><code>pip install -r requirements.txt</code></p>
+<div class="highlight"><pre><span></span><code>pip install -r requirements.txt
+</code></pre></div>
 </li>
 </ol>
 <p><strong>Install Docker</strong></p>
@@ -573,8 +580,10 @@ Give permission for docker to write to media
 <ol>
 <li>
 <p><strong>Run Migrations and collecstatic:</strong></p>
-<p><code>python manage.py migrate</code></p>
-<p><code>python manage.py collectstatic --noinput</code></p>
+<div class="highlight"><pre><span></span><code>python manage.py migrate
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>python manage.py collectstatic --noinput
+</code></pre></div>
 <p>Or just set Debug = True, no need for collecstatic</p>
 </li>
 <li>
@@ -584,18 +593,22 @@ Give permission for docker to write to media
 It is currently placed at docs/runwith_dev.env</li>
 </ul>
 <p>OR export these directly:
-<code>export DJANGO_ENV=dev # or prod
-export DJANGO_SECRET_KEY='your_secret_key'</code></p>
+<div class="highlight"><pre><span></span><code>export DJANGO_ENV=dev # or prod
+export DJANGO_SECRET_KEY=&#39;your_secret_key&#39;
+</code></pre></div></p>
 </li>
 <li>
 <p><strong>Start the Development Server:</strong></p>
 <p>schedule ping_cluster </p>
 <p>(to detect if qcluster is running)</p>
-<p><code>python manage.py create_heartbeat</code>
+<p><div class="highlight"><pre><span></span><code>python manage.py create_heartbeat
+</code></pre></div>
 start qcluster
-<code>python manage.py qcluster</code>
+<div class="highlight"><pre><span></span><code>python manage.py qcluster
+</code></pre></div>
 start server
-<code>python manage.py runserver</code></p>
+<div class="highlight"><pre><span></span><code>python manage.py runserver
+</code></pre></div></p>
 </li>
 </ol>
 <h2 id="tech-stack">Tech Stack</h2>
@@ -609,11 +622,13 @@ start server
 <h2 id="license">License</h2>
 <p>GNU Affero General Public License v3.0</p>
 <h2 id="contributing">Contributing</h2>
-<p>We still have to
-- Fix Save/Open workflow
-- Make Code shareable
-- Make a Library of user generated code.
-- Extend to other libraries, Since we are using docker image of manim, we can replace that with any library. I am thinking of a dropdown to select a library to run.</p>
+<p>We still have to</p>
+<ul>
+<li>Fix Save/Open workflow</li>
+<li>Make Code shareable</li>
+<li>Make a Library of user generated code.</li>
+<li>Extend to other libraries, Since we are using docker image of manim, we can replace that with any library. I am thinking of a dropdown to select a library to run.</li>
+</ul>
 <p>You are welcome to open a pull request</p>
 
 

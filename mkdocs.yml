@@ -6,3 +6,8 @@ theme:
 nav:
   - Home: index.md
   - Manim: manim.md
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences  
