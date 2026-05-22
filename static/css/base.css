@@ -11,7 +11,7 @@ body {
     box-sizing: border-box;
 }
 
-h1{
+h1 {
     padding: 2px 10px;
 }
 
@@ -61,7 +61,7 @@ nav a {
     padding: 14px 16px;
 }
 
-.nav-right{
+.nav-right {
     display: flex;
     align-items: center;
 }
@@ -178,15 +178,133 @@ nav a {
         padding: 10px;
     }
 
+    .dropbtn {
+        display: none;
+    }
+
     .dropdown-content {
+        font-size: 24px;
         box-shadow: none;
         width: 100%;
         display: block;
-        /* Always display dropdown content on mobile */
         position: static;
-        /* Remove absolute positioning on mobile */
-        padding-left: 5px;
-        /* Indent slightly to the right */
+        /* padding-left: 5px; */
     }
 
+    .dropdown-content a {
+        font-size: 24px;
+        padding: 10px 10px;
+    }
+
+}
+
+/* Settings */
+
+.settings-dropdown {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    vertical-align: middle;
+}
+
+.settings-label{
+    padding: 5px;
+}
+
+.settings-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: inherit;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+    margin: 0;
+
+    font-size: 18px;
+    line-height: 1;
+}
+
+.settings-btn :hover{
+    color: #ffffff;
+}
+
+.settings-menu {
+    position: absolute;
+    right: 0;
+    top: 40px;
+
+    background: #1f1f1f;
+    border: 1px solid #444;
+    border-radius: 8px;
+
+    padding: 10px 0;
+
+    min-width: 180px;
+    width: max-content;
+
+    display: none;
+    z-index: 1000;
+}
+
+.settings-menu.show {
+    display: block;
+}
+
+.settings-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 8px 14px;
+    gap: 16px;
+}
+
+.delete-account-btn {
+    background: none;
+    border: none;
+    color: #e74c3c;
+    cursor: pointer;
+
+    font-size: 14px;
+
+    width: 100%;
+    text-align: left;
+
+    padding: 8px 14px;
+}
+
+.delete-account-btn:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+@media (max-width: 768px) {
+    .settings-btn .settings-label {
+        display: flex;
+        padding: 15px 0px;
+    }
+
+    .settings-btn {
+        padding-left: 10px;
+
+    }
+
+    .settings-dropdown {
+        display: block;
+        width: 100%;
+    }
+
+    .settings-menu {
+        position: static !important;
+        top: unset !important;
+        right: unset !important;
+        width: 100%;
+        min-width: unset;
+        border-radius: 0;
+        border-left: none;
+        border-right: none;
+    }
 }

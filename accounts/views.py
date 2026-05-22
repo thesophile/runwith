@@ -33,3 +33,16 @@ def signup_view(request):
 def logout_view(request):
     logout(request)
     return redirect('/')  
+
+
+
+def delete_account(request):
+    if request.method == "POST":
+        if request.user.is_authenticated:
+            user = request.user
+            logout(request)
+            user.delete()
+
+            return JsonResponse({"status": "success"})
+
+    return JsonResponse({"status": "failed"}, status=400)
