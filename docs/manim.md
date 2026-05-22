@@ -15,8 +15,37 @@ Then you can make any changes and press the "save" button (ctrl+s) to save the c
 Also, clicking on an example, will import it to your current project and you can work on it like any of your projects.
 
 ___
+## Keyboard Shortcuts
+
+
+| General shortcuts |  |
+|---|---|
+| Ctrl + Alt + n | Create new project |
+| Ctrl + S | Save |
+| Ctrl + Enter | Render the code |
+
+| Editor shortcuts |  |
+|---|---|
+| Ctrl + Space | Auto-complete |
+| Ctrl + F | Find |
+| Ctrl + SHift + F | Replace |
+| Ctrl + G | Find next |
+| Shift + Ctrl + G | Find previous |
+| Ctrl + / | Toggle comment |
+| Ctrl + Z | Undo |
+| Ctrl + Y | Redo |
+| Tab | Indent |
+| Shift + Tab | Unindent |
+| Ctrl + A | Select all |
+| Ctrl + D | Delete line |
+<!-- | Alt + Up | Move line up | -->
+<!-- | Alt + Down | Move line down | -->
+
+> On macOS, use `Cmd` instead of `Ctrl`.
+___
+
+
 
 If you have any doubts, just ask on our [discord server](https://discord.gg/cCJauXrv9Z)
-
 
 Good luck manimators!

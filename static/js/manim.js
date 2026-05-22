@@ -5,7 +5,9 @@ var editor = CodeMirror.fromTextArea(document.getElementById('code'), {
     // value: 'from manim import*',
     theme: 'monokai',
     extraKeys: {
-        "Ctrl-Space": "autocomplete"  // Bind autocomplete to Ctrl-Space
+        "Ctrl-Space": "autocomplete",
+        "Ctrl-Shift-F": "replace",
+        "Ctrl-/": "toggleComment"
     }
 });
 
