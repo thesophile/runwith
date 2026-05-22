@@ -221,7 +221,17 @@ saveBtn.onclick = async function (event) {
 
 
 
+//theme toggle
 
+const themeToggle = document.querySelector('.theme-toggle input');
+
+themeToggle.addEventListener('change', () => {
+    if (themeToggle.checked) {
+        editor.setOption('theme', 'eclipse');
+    } else {
+        editor.setOption('theme', 'monokai');
+    }
+});
 
 
 
