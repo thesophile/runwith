@@ -421,3 +421,17 @@ def task_status_view(request, task_id):
         return JsonResponse({'status': 'queued'})
 
     return JsonResponse({'status': 'processing'})
+
+
+
+# delete code
+@csrf_exempt
+def delete_code(request, code_id):
+    if request.method == 'POST':
+        try:
+            code = Code.objects.get(id=code_id, user=request.user)
+            code.delete()
+            return JsonResponse({'status': 'success'})
+        except Code.DoesNotExist:
+            return JsonResponse({'status': 'error', 'message': 'Not found'}, status=404)
+    return JsonResponse({'status': 'error', 'message': 'Invalid method'}, status=405)

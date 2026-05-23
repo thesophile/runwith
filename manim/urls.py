@@ -12,5 +12,6 @@ urlpatterns = [
     path('set_code_name/', views.set_code_name, name='set_code_name'),
     path('get_code_name/', views.get_code_name, name='get_code_name'),
     path('task-status/<str:task_id>/', views.task_status_view, name='task-status'),
+    path('delete_code/<int:code_id>/', views.delete_code, name='delete_code'),
     path('', include('core.urls')),
 ]

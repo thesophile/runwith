@@ -108,16 +108,31 @@ examplesButton.onclick = function (event) {
 
 // Handle clicking an option
 openList.addEventListener('click', function (event) {
+    const deleteBtn = event.target.closest('.delete-code-btn');
+    if (deleteBtn) {
+        event.stopPropagation();
+        const codeId = deleteBtn.dataset.id;
+        if (!confirm('Delete this project?')) return;
+
+        fetch(`delete_code/${codeId}/`, {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
+            },
+        }).then(res => {
+            if (res.ok) {
+                deleteBtn.closest('.dropdown-item').remove();
+            } else {
+                alert('Failed to delete.');
+            }
+        });
+        return;
+    }
+
     const item = event.target.closest('.dropdown-item');
     if (!item) return;
-
-    const codeId = item.dataset.id;
-    console.log(`CodeId for selected dropdown: ${codeId}`);
-
-
-    opencode(codeId);
-
-    openList.style.display = "none"; // close the dropdown
+    opencode(item.dataset.id);
+    openList.style.display = "none";
 });
 
 // Handle clicking an option

@@ -83,7 +83,12 @@
                 <!-- Open list -->
                 <div id="open-list" class="dropdown-list" style="display: none;">
                     {% for code in saved_codes %}
-                    <div class="dropdown-item" data-id="{{ code.id }}">{{ code.name }}</div>
+                    <div class="dropdown-item" data-id="{{ code.id }}">
+                        <span class="dropdown-item-name">{{ code.name }}</span>
+                        <button type="button" class="delete-code-btn" data-id="{{ code.id }}" title="Delete project">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div> 
                     {% endfor %}
                 </div>
 
