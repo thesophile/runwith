@@ -435,3 +435,20 @@ def delete_code(request, code_id):
         except Code.DoesNotExist:
             return JsonResponse({'status': 'error', 'message': 'Not found'}, status=404)
     return JsonResponse({'status': 'error', 'message': 'Invalid method'}, status=405)
+
+
+@csrf_exempt
+def rename_code(request, code_id):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            new_name = data.get('name', '').strip()
+            if not new_name:
+                return JsonResponse({'status': 'error', 'message': 'Name cannot be empty'}, status=400)
+            code = Code.objects.get(id=code_id, user=request.user)
+            code.name = new_name
+            code.save()
+            return JsonResponse({'status': 'success'})
+        except Code.DoesNotExist:
+            return JsonResponse({'status': 'error', 'message': 'Not found'}, status=404)
+    return JsonResponse({'status': 'error', 'message': 'Invalid method'}, status=405)

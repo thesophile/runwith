@@ -204,7 +204,7 @@
     cursor: pointer;
     display: flex;
     align-items: center;
-    opacity: 0;
+    opacity: 0.9;
     transition: opacity 0.15s, color 0.15s;
 }
 
@@ -215,4 +215,42 @@
 .delete-code-btn:hover {
     color: #e05555;
     background: rgba(224, 85, 85, 0.1);
+}
+
+
+/* edit */
+
+.dropdown-item-actions {
+    display: flex;
+    gap: 4px;
+    flex-shrink: 0;
+}
+
+.edit-code-btn {
+    background: none;
+    border: none;
+    color: #888;
+    padding: 2px 4px;
+    font-size: unset;
+    font-family: unset;
+    font-weight: unset;
+    border-radius: 3px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: opacity 0.15s, color 0.15s;
+}
+
+.edit-code-btn:hover {
+    color: #6cb6ff;
+    background: rgba(108, 182, 255, 0.1);
+}
+
+.dropdown-item-actions {
+    margin-left: 34px; /* increase this for more gap */
+}
+
+.edit-code-btn i,
+.delete-code-btn i {
+    font-size: 12px;
 }

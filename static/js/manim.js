@@ -106,11 +106,39 @@ examplesButton.onclick = function (event) {
     examplesList.style.display = examplesList.style.display === "none" ? "block" : "none";
 };
 
-// Handle clicking an option
+// open projects
 openList.addEventListener('click', function (event) {
+    const editBtn = event.target.closest('.edit-code-btn');
+    if (editBtn) {
+        event.stopPropagation();
+        event.preventDefault();
+        const codeId = editBtn.dataset.id;
+        const currentName = editBtn.dataset.name;
+        const newName = prompt('Rename project:', currentName);
+        if (!newName || newName.trim() === currentName) return;
+
+        fetch(`rename_code/${codeId}/`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
+            },
+            body: JSON.stringify({ name: newName.trim() }),
+        }).then(res => {
+            if (res.ok) {
+                editBtn.dataset.name = newName.trim();
+                editBtn.closest('.dropdown-item').querySelector('.dropdown-item-name').textContent = newName.trim();
+            } else {
+                alert('Failed to rename.');
+            }
+        });
+        return;
+    }
+
     const deleteBtn = event.target.closest('.delete-code-btn');
     if (deleteBtn) {
         event.stopPropagation();
+        event.preventDefault();
         const codeId = deleteBtn.dataset.id;
         if (!confirm('Delete this project?')) return;
 

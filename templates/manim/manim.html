@@ -85,10 +85,17 @@
                     {% for code in saved_codes %}
                     <div class="dropdown-item" data-id="{{ code.id }}">
                         <span class="dropdown-item-name">{{ code.name }}</span>
-                        <button type="button" class="delete-code-btn" data-id="{{ code.id }}" title="Delete project">
-                            <i class="fas fa-trash"></i>
-                        </button>
-                    </div> 
+                        <div class="dropdown-item-actions">
+                            <button type="button" class="edit-code-btn" data-id="{{ code.id }}"
+                                data-name="{{ code.name }}" title="Rename project">
+                                <i class="fas fa-pen"></i>
+                            </button>
+                            <button type="button" class="delete-code-btn" data-id="{{ code.id }}"
+                                title="Delete project">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
                     {% endfor %}
                 </div>
 
