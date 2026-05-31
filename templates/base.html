@@ -79,21 +79,25 @@
 
                     <div class="dropdown">
                         <button class="dropdown-btn" data-dropdown="account-menu">
-                           <i class="fa-regular fa-circle-question"></i>
-                                <span>Docs</span>
+                            <span> <i class="fa-regular fa-circle-question"></i> Docs &#9662;</span>
                         </button>
 
                         <div id="account-menu" class="dropdown-menu">
 
                             <div class="dropdown-item">
-                                <a href="http://docs.runwith.cloud/manim" title="docs"><i
-                                        class="fa-regular fa-circle-question"></i>
-                                    <span class="settings-label">Docs</span>
+                                <a href="http://docs.runwith.cloud/manim" title="docs">
+                                    <i class="fa-solid fa-book"></i> Docs
                                 </a>
                             </div>
 
                             <div class="dropdown-item">
-                                <a href="{% url 'contact' %}" title="Free free to leave a message (I am not gonna read it)">Contact</a>
+                                <a href="{% url 'contact' %}"
+                                    title="Free free to leave a message (I am not gonna read it)">Contact</a>
+                            </div>
+
+                            <div class="dropdown-item">
+                                <a href="https://github.com/thesophile/runwith" title="Go to Github">View Source
+                                    Code</a>
                             </div>
 
                         </div>
@@ -130,13 +134,16 @@
                         </div>
                     </div>
 
-                    <a href="https://ko-fi.com/abhinavbabu" title="Sorry, but I am broke.">Donate</a>
+                    <a href="https://ko-fi.com/abhinavbabu" title="Sorry, but I am broke."> <i
+                            class="fa-solid fa-heart"></i> Donate</a>
 
                     <div class="dropdown">
                         <a href="#" class="dropbtn">
                             {% if user.is_authenticated %}
-                            <span>{{ user.username }} &#9662;</span>
+                            <i class="fa-solid fa-user"></i>
+                            <span> {{ user.username }} &#9662;</span>
                             {% else %}
+                            <i class="fa-solid fa-user"></i>
                             Account &#9662;
                             {% endif %}
                         </a>
