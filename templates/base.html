@@ -76,21 +76,41 @@
                 {% endif %} -->
                 <div class="menu">
 
-                    <a href="http://docs.runwith.cloud/manim" title="docs"><i class="fa-regular fa-circle-question"></i>
-                        <span class="settings-label">Docs</span>
-                    </a>
 
-                    <!-- Settings dropdown -->
-                    <div class="settings-dropdown">
-                        <button id="settings-btn" class="settings-btn" title="Settings">
-                            <i class="fa-solid fa-gear"></i>
-                            <span class="settings-label">Settings</span>
+                    <div class="dropdown">
+                        <button class="dropdown-btn" data-dropdown="account-menu">
+                           <i class="fa-regular fa-circle-question"></i>
+                                <span>Docs</span>
                         </button>
 
-                        <div id="settings-menu" class="settings-menu">
+                        <div id="account-menu" class="dropdown-menu">
 
-                            <!-- Theme toggle -->
-                            <div class="settings-item">
+                            <div class="dropdown-item">
+                                <a href="http://docs.runwith.cloud/manim" title="docs"><i
+                                        class="fa-regular fa-circle-question"></i>
+                                    <span class="settings-label">Docs</span>
+                                </a>
+                            </div>
+
+                            <div class="dropdown-item">
+                                <a href="{% url 'contact' %}" title="Free free to leave a message (I am not gonna read it)">Contact</a>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+                    <!-- Settings dropdown -->
+                    <div class="dropdown">
+                        <button class="dropdown-btn" data-dropdown="settings-menu">
+                            <i class="fa-solid fa-gear"></i>
+                            <span class="dropdown-label">Settings</span>
+                        </button>
+
+                        <div id="settings-menu" class="dropdown-menu">
+
+                            <div class="dropdown-item">
                                 <span>Editor Theme</span>
 
                                 <label class="theme-toggle">
@@ -99,19 +119,19 @@
                                 </label>
                             </div>
 
-                            {% if user.is_authenticated %}
-                            <!-- Delete account -->
-                            <button id="delete-account-btn" class="delete-account-btn">
-                                Delete Account
-                            </button>
-                            {% endif %}
+                            <div class="dropdown-item">
+                                {% if user.is_authenticated %}
+                                <button id="delete-account-btn" class="dropdown-danger">
+                                    Delete Account
+                                </button>
+                                {% endif %}
+                            </div>
 
                         </div>
                     </div>
 
                     <a href="https://ko-fi.com/abhinavbabu" title="Sorry, but I am broke.">Donate</a>
-                    <a href="{% url 'contact' %}"
-                        title="Free free to leave a message (I am not gonna read it)">Contact</a>
+
                     <div class="dropdown">
                         <a href="#" class="dropbtn">
                             {% if user.is_authenticated %}
@@ -236,43 +256,8 @@
 
     </script>
 
-    <script>
-        const settingsBtn = document.getElementById("settings-btn");
-        const settingsMenu = document.getElementById("settings-menu");
+    <script src="{% static 'js/manim/base.js' %}">
 
-        settingsBtn.addEventListener("click", () => {
-            settingsMenu.classList.toggle("show");
-        });
-
-        document.addEventListener("click", (e) => {
-            if (!e.target.closest(".settings-dropdown")) {
-                settingsMenu.classList.remove("show");
-            }
-        });
-
-        const deleteBtn = document.getElementById("delete-account-btn");
-
-        if (deleteBtn) {
-            deleteBtn.addEventListener("click", () => {
-
-                const confirmed = confirm(
-                    "Are you sure you want to permanently delete your account?"
-                );
-
-                if (confirmed) {
-                    fetch("/delete-account/", {
-                        method: "POST",
-                        headers: {
-                            "X-CSRFToken": "{{ csrf_token }}"
-                        }
-                    })
-                        .then(() => {
-                            alert("Account deleted");
-                            window.location.href = "/";
-                        });
-                }
-            });
-        }
     </script>
 
     {% block extra_scripts %}
