@@ -7,8 +7,9 @@
       margin: 51px 0 0 0;
       flex-grow: 1;
       display: flex;
-      height: calc(100vh - 51px);
       /* Adjust height to account for navbar */
+      height: calc(100vh - 51px);
+      height: auto;
       padding: 0;
       width: 100%;
       max-width: 100%;
@@ -19,13 +20,45 @@
       padding: 2px;
     }
 
+    /* Desktop */
     @media screen and (min-width: 768px) {
 
-      .code-section,
+      /* .code-section,
       .media-section {
         padding: 10px;
         width: 50%;
+      } */
+
+      .code-section {
+        width: 50%;
       }
+
+      .media-section {
+        flex: 1;
+        padding: 5px;
+      }
+    }
+
+    @media screen and (max-width: 767px) {
+      .container {
+        flex-direction: column;
+      }
+
+      .code-section {
+        flex: 1;
+      }
+    }
+
+
+    #dragbar {
+      width: 6px;
+      cursor: col-resize;
+      background: #444;
+      flex-shrink: 0;
+    }
+
+    #dragbar:hover {
+      background: #666;
     }
 
     /*buttons */
@@ -38,11 +71,14 @@
     .code-section {
       display: flex;
       flex-direction: column;
-      min-height: 50%;
+      /* min-height: 50%; */
+      height: auto;
       background-color: #252526;
       font-size: larger;
       font-family: "JetBrains Mono", monospace;
+    }
 
+    .media-section {
     }
 
     #code-form {
@@ -176,81 +212,82 @@
       background: #2a2a2a;
     }
 
-/* delte button */
+    /* delte button */
 
-.dropdown-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
+    .dropdown-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
 
-.dropdown-item-name {
-    flex: 1;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
+    .dropdown-item-name {
+      flex: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
 
-.delete-code-btn {
-    flex-shrink: 0;
-    background: none;
-    border: none;
-    color: #888;
-    padding: 2px 4px;
-    font-size: unset;
-    font-family: unset;
-    font-weight: unset;
-    border-radius: 3px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    opacity: 0.9;
-    transition: opacity 0.15s, color 0.15s;
-}
+    .delete-code-btn {
+      flex-shrink: 0;
+      background: none;
+      border: none;
+      color: #888;
+      padding: 2px 4px;
+      font-size: unset;
+      font-family: unset;
+      font-weight: unset;
+      border-radius: 3px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      opacity: 0.9;
+      transition: opacity 0.15s, color 0.15s;
+    }
 
-.dropdown-item:hover .delete-code-btn {
-    opacity: 1;
-}
+    .dropdown-item:hover .delete-code-btn {
+      opacity: 1;
+    }
 
-.delete-code-btn:hover {
-    color: #e05555;
-    background: rgba(224, 85, 85, 0.1);
-}
+    .delete-code-btn:hover {
+      color: #e05555;
+      background: rgba(224, 85, 85, 0.1);
+    }
 
 
-/* edit */
+    /* edit */
 
-.dropdown-item-actions {
-    display: flex;
-    gap: 4px;
-    flex-shrink: 0;
-}
+    .dropdown-item-actions {
+      display: flex;
+      gap: 4px;
+      flex-shrink: 0;
+    }
 
-.edit-code-btn {
-    background: none;
-    border: none;
-    color: #888;
-    padding: 2px 4px;
-    font-size: unset;
-    font-family: unset;
-    font-weight: unset;
-    border-radius: 3px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    transition: opacity 0.15s, color 0.15s;
-}
+    .edit-code-btn {
+      background: none;
+      border: none;
+      color: #888;
+      padding: 2px 4px;
+      font-size: unset;
+      font-family: unset;
+      font-weight: unset;
+      border-radius: 3px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      transition: opacity 0.15s, color 0.15s;
+    }
 
-.edit-code-btn:hover {
-    color: #6cb6ff;
-    background: rgba(108, 182, 255, 0.1);
-}
+    .edit-code-btn:hover {
+      color: #6cb6ff;
+      background: rgba(108, 182, 255, 0.1);
+    }
 
-.dropdown-item-actions {
-    margin-left: 34px; /* increase this for more gap */
-}
+    .dropdown-item-actions {
+      margin-left: 34px;
+      /* increase this for more gap */
+    }
 
-.edit-code-btn i,
-.delete-code-btn i {
-    font-size: 12px;
-}
+    .edit-code-btn i,
+    .delete-code-btn i {
+      font-size: 12px;
+    }

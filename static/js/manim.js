@@ -281,3 +281,34 @@ themeToggle.addEventListener('change', () => {
 
 
 
+const dragbar = document.getElementById("dragbar");
+const codeSection = document.querySelector(".code-section");
+const mediaSection = document.querySelector(".media-section");
+const container = document.querySelector(".container");
+
+let dragging = false;
+
+dragbar.addEventListener("mousedown", () => {
+    dragging = true;
+});
+
+document.addEventListener("mouseup", () => {
+    dragging = false;
+});
+
+document.addEventListener("mousemove", (e) => {
+    if (!dragging) return;
+
+    const containerWidth = container.offsetWidth;
+
+    let codePercent = (e.clientX / containerWidth) * 100;
+
+    codePercent = Math.max(40, Math.min(80, codePercent));
+
+    codeSection.style.width = `${codePercent}%`;
+    mediaSection.style.width = `${100 - codePercent}%`;
+
+    if (window.editor) {
+        editor.refresh(); // CodeMirror
+    }
+});
