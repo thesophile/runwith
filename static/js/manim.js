@@ -312,3 +312,6 @@ document.addEventListener("mousemove", (e) => {
         editor.refresh(); // CodeMirror
     }
 });
+
+
+

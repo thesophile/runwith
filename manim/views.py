@@ -213,6 +213,12 @@ def execute_code(request):
     # previous_code = request.POST.get('code', '')
 
     current_code_name = get_current_code_name()
+    
+    # Check if the url is a shared code
+    is_codeurl = checkurl(request)
+    
+    if is_codeurl:
+        return is_codeurl
 
     if request.method == 'POST' and request.POST.get('form_type') == 'execute':
         # Health check: Verify that a Q cluster is running
@@ -311,10 +317,16 @@ def save_new_code(request):
         print('save button clicked')
         code_text = request.POST.get('hidden_code_new')
         save_to_cache(code_text)
+        is_public = request.POST.get("is_public") == "on"
         name = request.POST.get('name')
         if name:
             # Save the code with the entered name
-            Code.objects.create(user=request.user, code_text=code_text, name=name)
+            Code.objects.create(
+                user=request.user,
+                code_text=code_text,
+                name=name,
+                is_public=is_public
+            )            
             set_current_code_name(name)
             print('code saved')
             # return redirect('home')  # Redirect to home page or wherever you want
@@ -452,3 +464,38 @@ def rename_code(request, code_id):
         except Code.DoesNotExist:
             return JsonResponse({'status': 'error', 'message': 'Not found'}, status=404)
     return JsonResponse({'status': 'error', 'message': 'Invalid method'}, status=405)
+
+
+def checkurl(request):
+    share_id = request.GET.get("id")
+
+    if share_id:
+        try:
+            shared_code = Code.objects.get(
+                share_id=share_id
+            )
+
+            if not shared_code.is_public:
+                return render(
+                    request,
+                    "manim/manim.html",
+                    {
+                        "alert_message": "This project is private."
+                    }
+                )
+
+            previous_code = shared_code.code_text
+
+        except Code.DoesNotExist:
+            return render(
+                request,
+                "manim/manim.html",
+                {
+                    "alert_message": "Project not found."
+                }
+            )
+        
+
+
+
+

@@ -158,6 +158,11 @@
                 <label for="name">Project name</label>
                 <input type="text" id="name" name="name" placeholder="my-awesome-project" required>
 
+                <label>
+                    <input type="checkbox" name="is_public" checked>
+                    Public
+                </label>
+
                 <div class="actions">
                     <button type="submit" class="primary">Save</button>
                     <button type="button" class="secondary close">Cancel</button>
@@ -381,6 +386,8 @@
 
 {% block extra_scripts %}
 
+
+
 <!-- {% if previous_code %}
 <script>
     const previous_code = `"{{ previous_code }}"`;
@@ -439,4 +446,12 @@
 
 </script>
 
+{% if alert_message %}
+<script>
+    alert("{{ alert_message|escapejs }}");
+    window.location.href = "/";
+</script>
+{% endif %}
+
 {% endblock %}
+
