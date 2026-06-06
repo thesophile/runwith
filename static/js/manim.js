@@ -313,5 +313,24 @@ document.addEventListener("mousemove", (e) => {
     }
 });
 
+document.getElementById("share-btn")
+.addEventListener("click", async () => {
 
+    const response = await fetch(
+        "get-share-url/"
+    );
+
+    const data = await response.json();
+
+    if (data.error) {
+        alert(data.error);
+        return;
+    }
+
+    navigator.clipboard.writeText(
+        data.url
+    );
+
+    alert("Share link copied");
+});
 

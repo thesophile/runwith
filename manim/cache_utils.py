@@ -16,10 +16,18 @@ def get_previous_code():
 
 #Current Code (A variable to keep track which code is crrently being edited)
      
+     
+def set_current_code_id(code_id):
+    cache.set('current_code_id', code_id)
+    
 def set_current_code_name(code_name):
     cache.set('current_code_name', code_name)
 
+def get_current_code_id():
+    code_id = cache.get('current_code_id')
+    return code_id 
 
 def get_current_code_name():
     code_name = cache.get('current_code_name')
-    return code_name      
+    return code_name 
+     

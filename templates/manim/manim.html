@@ -119,6 +119,13 @@
 
             </div>
 
+
+            <span id="current-project-name">
+                {{ current_code_name|default:"Unsaved Project" }}
+            </span>
+
+            <button id="share-btn">Share</button>
+
             <!-- right side -->
             <div>
                 <!-- Run button -->
@@ -454,4 +461,3 @@
 {% endif %}
 
 {% endblock %}
-

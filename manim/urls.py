@@ -14,5 +14,6 @@ urlpatterns = [
     path('task-status/<str:task_id>/', views.task_status_view, name='task-status'),
     path('delete_code/<int:code_id>/', views.delete_code, name='delete_code'),
     path('rename_code/<int:code_id>/', views.rename_code, name='rename_code'),
+    path('get-share-url/', views.get_share_url, name='get_share_url'),
     path('', include('core.urls')),
 ]

@@ -321,13 +321,14 @@ def save_new_code(request):
         name = request.POST.get('name')
         if name:
             # Save the code with the entered name
-            Code.objects.create(
+            code = Code.objects.create(
                 user=request.user,
                 code_text=code_text,
                 name=name,
                 is_public=is_public
-            )            
-            set_current_code_name(name)
+            )
+            set_current_code_id(code.id)            
+            set_current_code_name(code.name)
             print('code saved')
             # return redirect('home')  # Redirect to home page or wherever you want
     return redirect('manim_home')  # Redirect back to execute page after saving
@@ -348,14 +349,14 @@ def save_current_code(request):
             if not new_code_text:
                 return JsonResponse({'status': 'error', 'message': 'Code text is required'}, status=400)
 
-            current_code_name = get_current_code_name()
+            current_code_id = get_current_code_id()
 
-            if not current_code_name:
-                print ("No current Code name") 
+            if not current_code_id:
+                print ("No current Code id") 
                 print(f'current_code_name:{current_code_name}')
             
             # Save the code with the entered name
-            Code.objects.filter(user=request.user, name=current_code_name).update(code_text=new_code_text)
+            Code.objects.filter(user=request.user, id=current_code_id).update(code_text=new_code_text)
             print('code saved')
             
             return JsonResponse({'status': 'success'})
@@ -365,6 +366,7 @@ def save_current_code(request):
  
 def get_code_text(request, code_id):
     code = Code.objects.get(id=code_id)
+    set_current_code_id(code.id)
     set_current_code_name(code.name)
     print(f'Current code name set as {code.name}') 
     return JsonResponse({'code_text': code.code_text,'code_name':code.name})
@@ -495,7 +497,28 @@ def checkurl(request):
                 }
             )
         
+from django.urls import reverse
 
+
+def get_share_url(request):
+
+    code_id = get_current_code_id()
+    
+    print(f"current code id: {code_id}")
+
+    code = Code.objects.get(
+        id=code_id,
+        user=request.user
+    )
+    
+    url = request.build_absolute_uri(
+    reverse("manim_home")
+    )
+    url += f"?id={code.share_id}"
+
+    return JsonResponse({
+        "url": url
+    })
 
 
 
