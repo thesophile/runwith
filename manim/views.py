@@ -504,6 +504,11 @@ def get_share_url(request):
 
     code_id = get_current_code_id()
     
+    if not code_id:
+        return JsonResponse({
+        "no_code_id": 'Please create or open a project first.'
+    })
+    
     print(f"current code id: {code_id}")
 
     code = Code.objects.get(
@@ -516,9 +521,38 @@ def get_share_url(request):
     )
     url += f"?id={code.share_id}"
 
+    if code.is_public:
+        return JsonResponse({
+            "is_public": True,
+            "url": url
+        })
+    else:
+        return JsonResponse({
+            "is_public": False,
+            "url": url
+        })
+        
+        
+        
+@csrf_exempt
+def set_project_visibility(request):
+
+    data = json.loads(request.body)
+
+    code_id = get_current_code_id()
+
+    code = Code.objects.get(
+        id=code_id,
+        user=request.user
+    )
+
+    code.is_public = data["is_public"]
+    code.save()
+
     return JsonResponse({
-        "url": url
+        "status": "success"
     })
+        
 
 
 

@@ -124,7 +124,46 @@
                 {{ current_code_name|default:"Unsaved Project" }}
             </span>
 
+
+            <!-- Share Button -->
             <button id="share-btn">Share</button>
+
+            <!-- Share Modal -->
+            <div id="share-modal" class="modal">
+                <div class="modal-content">
+                    <span id="share-close" class="close">&times;</span>
+
+                    <h3>Share Project</h3>
+
+                    <div class="share-toggle-row">
+
+                        <span>Public</span>
+
+                        <label class="share-switch">
+                            <input type="checkbox" id="public-toggle">
+                            <span class="share-slider"></span>
+                        </label>
+
+                    </div>
+
+                    <div id="share-url-section" style="display:none; margin-top:15px;">
+                        <label>Share Link</label>
+
+                        <div class="share-url-row">
+                            <input type="text" id="share-url" readonly>
+
+                            <button id="copy-share-link" title="Copy">
+                                📋
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="private-message" style="display:none; margin-top:15px;">
+                        Enable Public to create a shareable link.
+                    </div>
+
+                </div>
+            </div>
 
             <!-- right side -->
             <div>

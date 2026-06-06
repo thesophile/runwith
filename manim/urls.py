@@ -15,5 +15,7 @@ urlpatterns = [
     path('delete_code/<int:code_id>/', views.delete_code, name='delete_code'),
     path('rename_code/<int:code_id>/', views.rename_code, name='rename_code'),
     path('get-share-url/', views.get_share_url, name='get_share_url'),
+    path('set-project-visibility/', views.set_project_visibility, name='set_project_visibility'),
+    
     path('', include('core.urls')),
 ]
