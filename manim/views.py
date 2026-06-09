@@ -237,14 +237,13 @@ def execute_code(request):
             return render(request, 'manim/manim.html', context)
 
         processsed = False
+        
         #delete old files
         media_dir = os.path.join(settings.BASE_DIR, 'media')
-
         delete_old_files(media_dir)
 
         current_code_name = get_current_code_name(request) # The name of the code opened or created
 
-        #save the code as a python file 
         code = request.POST.get('code', '')
         code_hash = get_code_hash(code)
 
@@ -287,7 +286,7 @@ def execute_code(request):
 
         #after HTTP request
         context = {'result_message':result_message,
-                   'previous_code': previous_code,
+                   'previous_code': code,
                    'MEDIA_URL': settings.MEDIA_URL,
                    'media_name':media_name,
                    'placeholder': False,
