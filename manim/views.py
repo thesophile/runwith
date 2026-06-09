@@ -209,11 +209,11 @@ def execute_code(request):
     saved_codes = Code.objects.filter(user=request.user) if request.user.is_authenticated else None
     
     #saving the entered code
-    previous_code = get_previous_code()
+    previous_code = get_previous_code(request)
     # previous_code = request.POST.get('code', '')
 
-    current_code_name = get_current_code_name()
-    
+    current_code_name = get_current_code_name(request)
+
     # Check if the url is a shared code
     is_codeurl = checkurl(request)
     
@@ -242,14 +242,13 @@ def execute_code(request):
 
         delete_old_files(media_dir)
 
-        current_code_name = get_current_code_name() # The name of the code opened or created
+        current_code_name = get_current_code_name(request) # The name of the code opened or created
 
         #save the code as a python file 
         code = request.POST.get('code', '')
         code_hash = get_code_hash(code)
 
-        previous_code = code
-        save_to_cache(previous_code)
+        save_to_cache(request, code)
 
         # find class name
         class_name = find_class_name(code) # we need this because the resultant video is saved in a folder named after class name. 
@@ -316,7 +315,7 @@ def save_new_code(request):
     if request.method == 'POST' and request.POST.get('form_type') == 'save':
         print('save button clicked')
         code_text = request.POST.get('hidden_code_new')
-        save_to_cache(code_text)
+        save_to_cache(request, code_text)
         is_public = request.POST.get("is_public") == "on"
         name = request.POST.get('name')
         if name:
@@ -327,8 +326,8 @@ def save_new_code(request):
                 name=name,
                 is_public=is_public
             )
-            set_current_code_id(code.id)            
-            set_current_code_name(code.name)
+            set_current_code_id(request, code.id)            
+            set_current_code_name(request, code.name)
             print('code saved')
             # return redirect('home')  # Redirect to home page or wherever you want
     return redirect('manim_home')  # Redirect back to execute page after saving
@@ -343,13 +342,13 @@ def save_current_code(request):
             data = json.loads(request.body)
             new_code_text = data.get('code_text')
 
-            save_to_cache(new_code_text)
+            save_to_cache(request, new_code_text)
             print(new_code_text)
             
             if not new_code_text:
                 return JsonResponse({'status': 'error', 'message': 'Code text is required'}, status=400)
 
-            current_code_id = get_current_code_id()
+            current_code_id = get_current_code_id(request)
 
             if not current_code_id:
                 print ("No current Code id") 
@@ -366,8 +365,8 @@ def save_current_code(request):
  
 def get_code_text(request, code_id):
     code = Code.objects.get(id=code_id)
-    set_current_code_id(code.id)
-    set_current_code_name(code.name)
+    set_current_code_id(request, code.id)
+    set_current_code_name(request, code.name)
     print(f'Current code name set as {code.name}') 
     return JsonResponse({'code_text': code.code_text,'code_name':code.name})
 
@@ -391,7 +390,7 @@ def set_code_name(request):
         data = json.loads(request.body)  # Parse JSON data from the request
         code_name = data.get('code_name')
 
-        result = set_current_code_name(code_name)
+        result = set_current_code_name(request, code_name)
 
         # Respond with success
         return JsonResponse({"status": "success", "message": "Code name set successfully", "result": result})
@@ -402,7 +401,7 @@ def get_code_name(request):
     if request.method == "POST":
         import json
 
-        result = get_current_code_name()
+        result = get_current_code_name(request)
 
         # Respond with success
         return JsonResponse({"status": "success", "message": "Code name set successfully", "result": result})
