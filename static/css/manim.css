@@ -450,3 +450,18 @@
     .share-switch input:checked+.share-slider::before {
       transform: translateX(24px);
     }
+
+
+
+    /* Clip the project name to fit in mobile */
+
+    @media (max-width: 768px) {
+    #current-project-name {
+        display: inline-block;
+        max-width: 7ch;
+
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+}
