@@ -443,54 +443,11 @@
 
 <script src="{% static 'js/manim/opencode.js' %}"></script>
 
-<script src="{% static 'js/manim.js' %}"></script>
+<script src="{% static 'js/manim/editor.js' %}"></script>
 
-<script>
+<script src="{% static 'js/manim/main.js' %}"></script>
 
-    // shortcuts 
-    // mod = Ctrl on Win/Linux, Cmd on Mac
-    const shortcuts = [
-        {
-            key: "s",
-            mod: true,
-            shift: false,
-            alt: false,
-            action: () => document.getElementById("save-btn").click()
-        },
-        {
-            key: "n",
-            mod: true,
-            shift: false,
-            alt: true,
-            action: () => document.getElementById("new-btn").click()
-        },
-        {
-            key: "Enter",
-            mod: true,
-            shift: false,
-            alt: false,
-            action: () => document.getElementById("run-btn").click()
-        }
-    ];
-
-    // Main listener
-    document.addEventListener("keydown", (e) => {
-        for (const s of shortcuts) {
-            const keyMatch = e.key.toLowerCase() === s.key.toLowerCase();
-            const modMatch = s.mod ? (e.ctrlKey || e.metaKey) : (!e.ctrlKey && !e.metaKey);
-            const shiftMatch = s.shift ? e.shiftKey : !e.shiftKey;
-            const altMatch = s.alt ? e.altKey : !e.altKey;
-
-            if (keyMatch && modMatch && shiftMatch && altMatch) {
-                e.preventDefault();   // prevent browser default only for this shortcut
-                s.action();
-                break;                // stop after first match
-            }
-        }
-    });
-
-
-</script>
+<script src="{% static 'js/manim/share_code.js' %}"></script>
 
 {% if alert_message %}
 <script>

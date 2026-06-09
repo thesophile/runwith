@@ -1,23 +1,7 @@
-var editor = CodeMirror.fromTextArea(document.getElementById('code'), {
-    mode: 'python',
-    lineNumbers: true,
-    tabSize: 4,
-    // value: 'from manim import*',
-    theme: 'monokai',
-    extraKeys: {
-        "Ctrl-Space": "autocomplete",
-        "Ctrl-Shift-F": "replace",
-        "Ctrl-/": "toggleComment"
-    }
-});
 
 
-// Get the modal
 const modal = document.getElementById("save-modal");
 const closeButtons = modal.querySelectorAll(".close");
-
-
-
 
 // Get the button that opens the modal
 var savenewBtn = document.getElementById("new-btn");
@@ -102,9 +86,7 @@ openButton.onclick = function (event) {
     }
 };
 
-examplesButton.onclick = function (event) {
-    examplesList.style.display = examplesList.style.display === "none" ? "block" : "none";
-};
+
 
 // open projects
 openList.addEventListener('click', function (event) {
@@ -163,7 +145,12 @@ openList.addEventListener('click', function (event) {
     openList.style.display = "none";
 });
 
-// Handle clicking an option
+// Opening an Example
+
+examplesButton.onclick = function (event) {
+    examplesList.style.display = examplesList.style.display === "none" ? "block" : "none";
+};
+
 examplesList.addEventListener('click', function (event) {
     const item = event.target.closest('.dropdown-item');
     if (!item) return;
@@ -264,22 +251,7 @@ saveBtn.onclick = async function (event) {
     }
 };
 
-
-
-//theme toggle
-
-const themeToggle = document.querySelector('.theme-toggle input');
-
-themeToggle.addEventListener('change', () => {
-    if (themeToggle.checked) {
-        editor.setOption('theme', 'eclipse');
-    } else {
-        editor.setOption('theme', 'monokai');
-    }
-});
-
-
-
+//Dragbar to resize window
 
 const dragbar = document.getElementById("dragbar");
 const codeSection = document.querySelector(".code-section");
@@ -313,149 +285,4 @@ document.addEventListener("mousemove", (e) => {
     }
 });
 
-// document.getElementById("share-btn")
-// .addEventListener("click", async () => {
 
-//     const response = await fetch(
-//         "get-share-url/"
-//     );
-
-//     const data = await response.json();
-
-//     if(data.no_code_id){
-//         alert(data.no_code_id);
-//         return
-//     }
-
-//     if (data.error) {
-//         alert(data.error);
-//         return;
-//     }
-
-//     // navigator.clipboard.writeText(
-//     //     data.url
-//     // );
-
-//     // alert("Share link copied");
-// });
-
-const shareBtn = document.getElementById("share-btn");
-const shareModal = document.getElementById("share-modal");
-const shareClose = document.getElementById("share-close");
-
-const publicToggle =
-    document.getElementById("public-toggle");
-
-const shareUrl =
-    document.getElementById("share-url");
-
-const shareUrlSection =
-    document.getElementById("share-url-section");
-
-const privateMessage =
-    document.getElementById("private-message");
-
-const copyBtn =
-    document.getElementById("copy-share-link");
-
-
-// Open modal
-shareBtn.addEventListener("click", async () => {
-
-    const response = await fetch("get-share-url/");
-    const data = await response.json();
-
-    if (data.no_code_id) {
-        alert(data.no_code_id);
-        return;
-    }
-
-    if (data.error) {
-        alert(data.error);
-        return;
-    }
-
-    shareUrl.value = data.url;
-
-    publicToggle.checked = data.is_public;
-
-    updateShareUI();
-
-    shareModal.style.display = "block";
-});
-
-
-// Close button
-shareClose.addEventListener("click", () => {
-    shareModal.style.display = "none";
-});
-
-
-// Click outside modal
-window.addEventListener("click", (e) => {
-
-    if (e.target === shareModal) {
-        shareModal.style.display = "none";
-    }
-
-});
-
-
-// Copy URL
-copyBtn.addEventListener("click", async () => {
-
-    await navigator.clipboard.writeText(
-        shareUrl.value
-    );
-
-    copyBtn.textContent = "✓";
-
-    setTimeout(() => {
-        copyBtn.textContent = "📋";
-    }, 1000);
-
-});
-
-
-// Public toggle
-publicToggle.addEventListener("change", async () => {
-
-    const response = await fetch(
-        "set-project-visibility/",
-        {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                is_public: publicToggle.checked
-            })
-        }
-    );
-
-    const data = await response.json();
-
-    if (data.status === "success") {
-        updateShareUI();
-    }
-});
-
-
-// Show / hide URL section
-function updateShareUI() {
-
-    console.log("toggle:", publicToggle.checked);
-
-    if (publicToggle.checked) {
-
-        shareUrlSection.style.display = "block";
-
-        privateMessage.style.display = "none";
-
-    } else {
-
-        shareUrlSection.style.display = "none";
-
-        privateMessage.style.display = "block";
-    }
-}
