@@ -9,6 +9,16 @@ ALLOWED_HOSTS = ['runwith.cloud', 'www.runwith.cloud', 'manim.runwith.cloud']
 MEDIA_URL = 'https://runwith.cloud/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+from dotenv import load_dotenv
+import os
+
+load_dotenv(BASE_DIR / 'runwith_prod.env') 
+
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
+if not SECRET_KEY:
+    raise ValueError("The DJANGO_SECRET_KEY environment variable is not set.")
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -29,12 +39,3 @@ SESSION_COOKIE_SECURE = True
 SESSION_COOKIE_DOMAIN = ".runwith.cloud"
 CSRF_COOKIE_DOMAIN = ".runwith.cloud"
 
-from dotenv import load_dotenv
-import os
-
-load_dotenv(BASE_DIR / 'runwith_prod.env') 
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
-if not SECRET_KEY:
-    raise ValueError("The DJANGO_SECRET_KEY environment variable is not set.")
