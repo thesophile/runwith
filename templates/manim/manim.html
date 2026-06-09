@@ -82,13 +82,15 @@
                         <button type="button" id="save-btn" title='(Ctrl+s) Save your "precious" project'>Save</button>
 
                         <!-- New button -->
-                        <button type="button" id="new-btn" class="has-submenu" title="Create new project (Ctrl+Alt+n)">New</button>
+                        <button type="button" id="new-btn" class="has-submenu"
+                            title="Create new project (Ctrl+Alt+n)">New</button>
 
 
                         <div class="file-dropdown-item open-wrapper">
 
                             <!-- Open Button -->
-                            <button id="open-button" class="has-submenu" title="Open saved project">Open &#9662;</button>
+                            <button id="open-button" class="has-submenu" title="Open saved project">Open
+                                &#9662;</button>
 
                             <!-- Open list -->
                             <div id="open-list" class="dropdown-list open-submenu" style="display: none;">
@@ -144,8 +146,7 @@
             </span>
 
 
-            <!-- Share Button -->
-            <button id="share-btn">Share</button>
+
 
             <!-- Share Modal -->
             <div id="share-modal" class="modal">
@@ -186,6 +187,10 @@
 
             <!-- right side -->
             <div>
+
+                <!-- Share Button -->
+                <button id="share-btn">Share <i class="fa-solid fa-share-nodes"></i> </button>
+
                 <!-- Run button -->
                 <button id="run-btn" type="submit" value="Run" onclick="ShowSpinner(); HidePlaceholder();"
                     form="code-form" title="Torture my potato server (Ctrl+Enter)">
