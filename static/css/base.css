@@ -83,6 +83,12 @@ nav a {
     color: #ffffff;
 }
 
+.nav-left, .nav-left h1 {
+    margin-bottom: 0px;
+    margin-top: 0px;
+    padding-bottom: 0px;
+    padding-top: 0px;
+}
 /**/
 
 

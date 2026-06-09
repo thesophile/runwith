@@ -17,7 +17,7 @@
 <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 <link rel="stylesheet" href="{% static 'css/theme-button.css' %}">
 <link rel="stylesheet" href="{% static 'css/manim.css' %}">
-
+<link rel="stylesheet" href="{% static 'css/manim/manim-toolbar.css' %}">
 
 <!--CodeMirror Editor-->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.8/codemirror.min.css">
@@ -71,33 +71,52 @@
                     <button type="submit" id="save-btn" title='(Ctrl+s) Save your "precious" project'>Save</button>
                 </form> -->
 
-                <input type="hidden" id="hidden_code_current">
-                <button type="button" id="save-btn" title='(Ctrl+s) Save your "precious" project'>Save</button>
+                <div class="file-dropdown">
+                    <button class="file-dropdown-btn" id="file-dropdown-btn">
+                        File ▼
+                    </button>
 
-                <!-- New button -->
-                <button type="button" id="new-btn" title="Create new project (Ctrl+Alt+n)">New</button>
+                    <div class="file-dropdown-menu" id="file-dropdown-menu">
 
-                <!-- Open Button -->
-                <button id="open-button" title="Open saved project">Open &#9662;</button>
+                        <input type="hidden" id="hidden_code_current">
+                        <button type="button" id="save-btn" title='(Ctrl+s) Save your "precious" project'>Save</button>
 
-                <!-- Open list -->
-                <div id="open-list" class="dropdown-list" style="display: none;">
-                    {% for code in saved_codes %}
-                    <div class="dropdown-item" data-id="{{ code.id }}">
-                        <span class="dropdown-item-name">{{ code.name }}</span>
-                        <div class="dropdown-item-actions">
-                            <button type="button" class="edit-code-btn" data-id="{{ code.id }}"
-                                data-name="{{ code.name }}" title="Rename project">
-                                <i class="fas fa-pen"></i>
-                            </button>
-                            <button type="button" class="delete-code-btn" data-id="{{ code.id }}"
-                                title="Delete project">
-                                <i class="fas fa-trash"></i>
-                            </button>
+                        <!-- New button -->
+                        <button type="button" id="new-btn" class="has-submenu" title="Create new project (Ctrl+Alt+n)">New</button>
+
+
+                        <div class="file-dropdown-item open-wrapper">
+
+                            <!-- Open Button -->
+                            <button id="open-button" class="has-submenu" title="Open saved project">Open &#9662;</button>
+
+                            <!-- Open list -->
+                            <div id="open-list" class="dropdown-list open-submenu" style="display: none;">
+                                {% for code in saved_codes %}
+                                <div class="dropdown-item" data-id="{{ code.id }}">
+                                    <span class="dropdown-item-name">{{ code.name }}</span>
+                                    <div class="dropdown-item-actions">
+                                        <button type="button" class="edit-code-btn" data-id="{{ code.id }}"
+                                            data-name="{{ code.name }}" title="Rename project">
+                                            <i class="fas fa-pen"></i>
+                                        </button>
+                                        <button type="button" class="delete-code-btn" data-id="{{ code.id }}"
+                                            title="Delete project">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
                         </div>
+
                     </div>
-                    {% endfor %}
+
+
+
                 </div>
+
+
 
 
                 <!-- Examples button -->

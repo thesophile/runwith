@@ -286,3 +286,38 @@ document.addEventListener("mousemove", (e) => {
 });
 
 
+// toolbar file dropdown
+
+const fileBtn = document.getElementById("file-dropdown-btn");
+const fileMenu = document.getElementById("file-dropdown-menu");
+
+fileBtn.addEventListener("click", () => {
+    console.log("clicked");
+});
+
+fileBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    fileMenu.classList.toggle("show");
+});
+
+document.addEventListener("click", (e) => {
+    if (
+        !fileMenu.contains(e.target) &&
+        !fileBtn.contains(e.target)
+    ) {
+        fileMenu.classList.remove("show");
+    }
+});
+
+// close dropdown when clicking on any item except those with .has-submenu
+
+document.querySelector(".file-dropdown-menu").addEventListener("click", (e) => {
+
+    if (e.target.closest(".has-submenu")) {
+        return; // don't close
+    }
+
+    document
+        .querySelectorAll(".show")
+        .forEach(el => el.classList.remove("show"));
+});

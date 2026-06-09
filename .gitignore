@@ -9,6 +9,8 @@ manim/python_code_files/*
 myenv/
 runwithenv/
 
+!src/runwith_dev.env
+
 # Ignore all contents of the media folder except for the keep file
 media/*
 !media/keep
