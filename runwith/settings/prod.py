@@ -38,11 +38,13 @@ CSRF_TRUSTED_ORIGINS = os.getenv("CSRF_TRUSTED_ORIGINS", "").split(",")
 # CSRF_COOKIE_SECURE = True
 # SESSION_COOKIE_SECURE = True
 
-CSRF_COOKIE_SECURE = os.environ.get('cookie_secure')
-SESSION_COOKIE_SECURE = os.environ.get('cookie_secure')
+CSRF_COOKIE_SECURE = os.environ.get("cookie_secure", "True").lower() == "true"
+SESSION_COOKIE_SECURE = os.environ.get("cookie_secure", "True").lower() == "true"
 
 
 #so that login in any app ensures login in all apps
-SESSION_COOKIE_DOMAIN = ".runwith.cloud"
-CSRF_COOKIE_DOMAIN = ".runwith.cloud"
+# SESSION_COOKIE_DOMAIN = ".runwith.cloud"
+# CSRF_COOKIE_DOMAIN = ".runwith.cloud"
 
+SESSION_COOKIE_DOMAIN = os.environ.get("SESSION_COOKIE_DOMAIN") or None
+CSRF_COOKIE_DOMAIN = os.environ.get("CSRF_COOKIE_DOMAIN") or None
