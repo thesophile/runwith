@@ -32,7 +32,8 @@ DATABASES = {
 }
 
 # CSRF and Cookie Security Settings
-CSRF_TRUSTED_ORIGINS = ["https://runwith.cloud", "https://www.runwith.cloud", "https://manim.runwith.cloud"]
+# CSRF_TRUSTED_ORIGINS = ["https://runwith.cloud", "https://www.runwith.cloud", "https://manim.runwith.cloud"]
+CSRF_TRUSTED_ORIGINS = os.getenv("CSRF_TRUSTED_ORIGINS", "").split(",")
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
 
